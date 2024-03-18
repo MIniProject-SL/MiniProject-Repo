@@ -1,4 +1,4 @@
-//javascript code for backend
+
 const board = document.getElementById('board');
 let currentPlayer = 'X';
 let gameStatus = ['', '', '', '', '', '', '', '', ''];
