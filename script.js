@@ -1,6 +1,7 @@
 //javascript code for backend
 let btn=document.querySelectorAll('.eachbox');
 let move0=true;
+//winning orders
 let winningOrder=[
     [0,1,2],
     [3,4,5],
