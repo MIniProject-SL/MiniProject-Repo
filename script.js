@@ -1,60 +1,70 @@
-
-const board = document.getElementById('board');
-let currentPlayer = 'X';
-let gameStatus = ['', '', '', '', '', '', '', '', ''];
-const winPatterns = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-];
-
-function checkWinner() {
-  for (let i = 0; i < winPatterns.length; i++) {
-    const [a, b, c] = winPatterns[i];
-    if (gameStatus[a] && gameStatus[a] === gameStatus[b] && gameStatus[a] === gameStatus[c]) {
-      return gameStatus[a];
+let btn=document.querySelectorAll('.eachbox');
+let move0=true;
+let winningOrder=[
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,4,8],
+    [2,4,6],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8]
+]
+btn.forEach((box)=>{
+    box.addEventListener('click',()=>{
+        if(move0){
+            box.innerHTML='O';
+            move0=false;
+        }
+        else{
+            box.innerHTML='X';
+            move0=true;
+        }
+        box.disabled=true;
+        winningOrder.forEach((arr)=>{     
+        // console.log(arr[0],arr[1],arr[2])
+        // console.log(btn[arr[0]],btn[arr[1]],btn[arr[2]])
+        let val1=btn[arr[0]].innerHTML;
+        let val2=btn[arr[1]].innerHTML;
+        let val3=btn[arr[2]].innerHTML;
+        // console.log(val1);
+        // console.log(val2);
+        // console.log(val3);
+        if(val1!=='' && val2!==''&& val3!=='' )
+  {
+        if(val1===val2 && val2===val3){
+            disablebox();
+            console.log("Winner Winner Chicken Dinner");
+            console.log(val1);
+            document.querySelector('.hide').classList.add('winner');
+            result(val1);
+        }
     }
-  }
-  return null;
+        }
+        );
+    })
+})
+function myfun(){
+    document.querySelector('.hide').classList.remove('winner')
+    winningOrder.forEach((arr)=>{
+        btn[arr[0]].innerText='';
+        btn[arr[1]].innerText='';
+        btn[arr[2]].innerText='';
+        btn.forEach((box)=>
+        {
+            box.disabled=false;
+        })
+
+    })
+    
 }
-
-function handleClick(index) {
-  if (gameStatus[index] || checkWinner()) return;
-  gameStatus[index] = currentPlayer;
-  render();
-  const winner = checkWinner();
-  if (winner) {
-    alert(`Player ${winner} wins!`);
-    resetGame();
-  } else if (!gameStatus.includes('')) {
-    alert("It's a draw!");
-    resetGame();
-  } else {
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-  }
+function result(val1){
+    document.querySelector('.winner').innerHTML=`<h2> 👑 Winner is ${val1} 👑</h2>
+    <div><button  class='newgame' onclick="myfun()">NEW GAME</button></div>`
 }
-
-function resetGame() {
-  gameStatus = ['', '', '', '', '', '', '', '', ''];
-  currentPlayer = 'X';
-  render();
+function disablebox()
+{
+    btn.forEach((but)=>{
+        but.disabled=true;
+    })
 }
-
-function render() {
-  board.innerHTML = '';
-  gameStatus.forEach((cell, index) => {
-    const cellElement = document.createElement('div');
-    cellElement.classList.add('cell');
-    cellElement.textContent = cell;
-    cellElement.addEventListener('click', () => handleClick(index));
-    board.appendChild(cellElement);
-  });
-}
-
-render();
-
