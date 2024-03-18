@@ -33,7 +33,7 @@ python tic_tac_toe.py
 Contributions are welcome! If you find any bugs or have ideas for improvements, feel free to open an issue or submit a pull request.
 
 # License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the Apache-2.0 license - see the LICENSE file for details.
 
 # Authors
 1. Chaitanya Muley
