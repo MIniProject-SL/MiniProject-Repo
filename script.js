@@ -1,3 +1,4 @@
+//javascript code for backend
 let btn=document.querySelectorAll('.eachbox');
 let move0=true;
 let winningOrder=[
