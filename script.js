@@ -12,6 +12,7 @@ let winningOrder=[
     [1,4,7],
     [2,5,8]
 ]
+//buttons for each box
 btn.forEach((box)=>{
     box.addEventListener('click',()=>{
         if(move0){
